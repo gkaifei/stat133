@@ -103,7 +103,7 @@ wr1500m <- data.frame(wr1500m,times_sec)
 
 # Your ggplot / qplot command:
 a <- ggplot(data=wr1500m, aes(x=year, y=times_sec)) 
-a <- a + geom_step()
+a + geom_step()
 
 
 # Q2b. Redo the plot using a date that incorporates the month as 
@@ -124,7 +124,6 @@ wr1500m <- data.frame(wr1500m,new_year)
 # Your qplot command:
 b <- ggplot(data=wr1500m, aes(x=new_year, y=times_sec))
 b <- b + geom_step()
-b
 
 
 # Q3. The current world record was set in 1998. If we want to
@@ -138,7 +137,9 @@ b
 wr_1998 <- min(wr1500m$times)+180
 
 # Your ggplot command:
-b + geom_segment(aes(x=1998+7/12, y=wr_1998, xend=2015, yend=wr_1998))
+
+b <- b + geom_segment(aes(x=1998+7/12, y=wr_1998, xend=2015, yend=wr_1998)) + xlim(1880,2030) + ylim(200,260)
+b
 ###########Fix this!!!
 
 # Q4. There are two times where the record stood for several
@@ -166,7 +167,7 @@ b <- b + geom_vline(xintercept=wr_1998, color="green")
 wr_1998_time <- wr1500m$times_sec[wr1500m$year == 1998]
 wr_1998_athlete <- wr1500m$athlete[wr1500m$year == 1998]
 b <- b + annotate("text", x=wr_1998-14, y = wr_1998_time + 10, label = wr_1998_athlete, color="blue")
-
+b
 
 # Q5. Now we are ready to add other contextual information.
 # Remake the plot as before but now adding axis labels and a title.
@@ -369,8 +370,4 @@ year <- sapply(day,function(x)floor(x))
 n1989.rain <- sapply(year, function(x)sum(x == 1989))
 n1989.rain
 
-########floor_the_number <- sapply(day, floor)
-########floor_the_number
-^#######n1989.rain <- sapply(floor_the_number, sum(x == 1989))
-########n1989.rain
 
