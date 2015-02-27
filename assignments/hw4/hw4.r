@@ -44,11 +44,9 @@ powers <- function(x, k){
 return (x.powers)
 }
 
-names(data) <- c("new_name", "another_new_name")
 ######Kevin: data=NA set the matrix empty!!!
 ######Kevin: x.powers[,i] get access to that column
 ######The name!!!
-?paste
 
 
 #### Function #3
@@ -92,11 +90,9 @@ recipeConversion <- function(recipe){
            recipe[i,2] <- "grams"
            recipe[i,1] <- round(recipe[i,1]*28.3/5)*5
       }
-  return recipe
+  return(recipe)
 }
 
-
-               
 
 ########| or in R
 ########(x/5)*5 round to the nearest multiple of 5
