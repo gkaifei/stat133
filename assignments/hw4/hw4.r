@@ -35,14 +35,27 @@ listLengths <- function(data.list) {
 # <x.powers> : A matrix of size [n x k] where the first column is x, the second column x^2, the third column x^4, etc.
 #              the column names should be : "x", "x^2", "x^3" etc.
 
-powers <- function(x, k){  
-  n <- length(x)        
- x.powers <- matrix(data=NA,nrow=n, ncol=k)
-    for (i in 1:k){d
-      x.powers[,i] <- x^i
-     }
-return (x.powers)
+powers <- function(x, k){
+  if(!is.numeric(x)) warning("x should be a numeric vector")
+  x.powers <- x
+  x.colnames <- "x"
+  for(i in 2:k){
+    x.powers <- cbind(x.powers, x^i)
+    x.colnames <- cbind(x.colnames, paste("x^", i, sep=""))
+  }
+  colnames(x.powers) <- x.colnames
+  return(x.powers)
 }
+
+
+#powers <- function(x, k){  
+#  n <- length(x)        
+# x.powers <- matrix(data=NA,nrow=n, ncol=k)
+#    for (i in 1:k){d
+#      x.powers[,i] <- x^i
+#     }
+#return (x.powers)
+#}
 
 ######Kevin: data=NA set the matrix empty!!!
 ######Kevin: x.powers[,i] get access to that column
