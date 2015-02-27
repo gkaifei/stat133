@@ -13,11 +13,17 @@
 # <element.lengths>: a numeric vector whose entries are the lengths of each
 #   element of <data.list>
 
+
 listLengths <- function(data.list) {
-
-    # your code here
-
+  element.lengths1 <- sapply(data.list, length)
+  element.lengths=as.vector(element.lengths1)
+  return (element.lengths)
 }
+
+listLengths(rain)
+
+######sapply applies the same function to each element of an input. 
+######as. vector 
 
 #### Function 2
 #### Implement the function "powers"
@@ -30,11 +36,22 @@ listLengths <- function(data.list) {
 # <x.powers> : A matrix of size [n x k] where the first column is x, the second column x^2, the third column x^4, etc.
 #              the column names should be : "x", "x^2", "x^3" etc.
 
-powers <- function(x, k){
-
+powers <- function(x, k){  
+  n <- length(x)        
+ x.powers <- matrix(data=NA,nrow=n, ncol=k)
+    for (i in 1:k){d
+      x.powers[,i] <- x^i
+     }
+return (x.powers)
 }
 
- 
+names(data) <- c("new_name", "another_new_name")
+######Kevin: data=NA set the matrix empty!!!
+######Kevin: x.powers[,i] get access to that column
+######The name!!!
+?paste
+
+
 #### Function #3
 #### Implement the function "recipeConversion"
 
@@ -64,8 +81,29 @@ powers <- function(x, k){
 
 # Put your code here
 recipeConversion <- function(recipe){
-
+  if (colnames(recipe)[1] != "amount" | colnames(recipe)[2] != "unit" | colnames(recipe)[3] != "ingredient") | ncol>4
+      stop ("Please check your data.")
+  else
+      k <- nrow(recipe)
+      for (i in 1:k){
+        if (recipe[i,2]=="cup" | recipe[i,2] =="cups")
+           recipe[i,2] <- "ml"
+           recipe[i,1] <- round(recipe[i,1]*236.6/5)*5
+        else recipe[i,2] =="oz" 
+           recipe[i,2] <- "grams"
+           recipe[i,1] <- round(recipe[i,1]*28.3/5)*5
+      }
+  return recipe
 }
+
+
+               
+
+########| or in R
+########(x/5)*5 round to the nearest multiple of 5
+a <- c(1,1,1,1,1)               
+b <-powers(a,5)               
+nrow(b)
 
 
 #### Function #4a
@@ -90,9 +128,15 @@ recipeConversion <- function(recipe){
 # -- The bootstrap variance is the sample variance of mu_1, mu_2, ..., mu_B
 
 bootstrapVarEst <- function(x, B){
-
+  boot_mean <- rep(0,B)
+  for (i in 1:B){
+    new_sample <- sample(x=x, size=n, replace=TRUE)
+    boot_mean[i] <- mean(new_sample)
+  }
+return(var(boot_mean))
 }
 
+########## rep(0,B): create a random vector which will be updated later.
 #### Function #4b
 #### Implement the function "jackknifeVarEst"
 
@@ -111,8 +155,13 @@ bootstrapVarEst <- function(x, B){
 #     for this reduced sample calculate the sample mean (get mu_1, mu_2, ..., mu_n)
 # -- The jackknife variance is the sample variance of mu_1, mu_2, ..., mu_n
 
-jackknifeVarEst <- fuction(x){
-
+jackknifeVarEst <- function(x){
+  jackknife_mean <- rep(0,x)
+  n <- length(x)
+  for (i in n) {
+    jackknife_mean[i] <- mean(x[-i])
+  }
+return(var(jackknife_mean))
 }
 
 #### Function #4c
@@ -127,8 +176,16 @@ jackknifeVarEst <- fuction(x){
 
 # Note: this function calls the previous two functions.
 
-samplingVarEst <- function(  ){
-
+samplingVarEst <- function(x,type="bootstrap"){
+  if (type == "bootstrap"){
+    sampling.sigma.est <- bootstrapVarEst(x)
+  }
+  else if (type =="jackknife"){
+    sampling.sigma.est <- jackknifeVarEst(x)
+  }
+  else { 
+    stop ("Please enter correct parameters")
 }
-
+return(samling.sigma.est)
+}
 
