@@ -20,7 +20,6 @@ listLengths <- function(data.list) {
   return (element.lengths)
 }
 
-listLengths(rain)
 
 ######sapply applies the same function to each element of an input. 
 ######as. vector 
@@ -101,9 +100,6 @@ recipeConversion <- function(recipe){
 
 ########| or in R
 ########(x/5)*5 round to the nearest multiple of 5
-a <- c(1,1,1,1,1)               
-b <-powers(a,5)               
-nrow(b)
 
 
 #### Function #4a
