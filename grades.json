@@ -1,0 +1,23 @@
+{
+    "email": "guokaifei@berkeley.edu", 
+    "github_name": "gkaifei", 
+    "grades": {
+        "hw1": {
+            "note": "", 
+            "hash": "a5057b5db7c34663278659960dc77855a1db32ea", 
+            "earned": 20, 
+            "possible": 20, 
+            "penalty": 0, 
+            "parts": {
+                "hw1": {
+                    "possible": 20, 
+                    "earned": 20
+                }
+            }
+        }
+    }, 
+    "login": "gkaifei", 
+    "name": "Kaifei Guo", 
+    "status": "enrolled", 
+    "url": "git@github.com:gkaifei/stat133.git"
+}
