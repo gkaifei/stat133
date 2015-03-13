@@ -73,6 +73,6 @@ gestByAge <- function(age.cutoff, ages, gestation){
 # 2) points of mothers whose smoking status is never should be colored red
 subset.notnever <- subset(infants, smoke != "Never")
 subset.never <- subset(infants, smoke =="Never")
-plot(subset.notnever$gestation,subset.notnever$bwt)
+plot(subset.notnever$gestation,subset.notnever$bwt, main ="Birthweigth v gestation")
 points(subset.never$gestation,subset.never$bwt,cex=1, col="red")
 
