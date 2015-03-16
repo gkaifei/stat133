@@ -19,5 +19,6 @@
     "login": "gkaifei", 
     "name": "Kaifei Guo", 
     "status": "enrolled", 
-    "url": "git@github.com:gkaifei/stat133.git"
+    "url": "git@github.com:gkaifei/stat133.git", 
+    "section": "lab1"
 }
