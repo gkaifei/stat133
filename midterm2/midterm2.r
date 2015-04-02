@@ -8,13 +8,17 @@
 # entries: 6, 12, 18, etc.
 
 #x <- <your code here>
-
+v <- seq(from = 6, to = 6000, by= 6)
 
 # [1 pt]
 # Create [y], a logical vector of length 2000 
 # with y[i]=T if x[i] is divisible by 10, otherwise F
 
 # y <- <your code here>
+yy <- 1:2000
+y <- yy/10
+y
+length(yy)
 
 # [1 pt]
 # Create [w], a random permutation of the numeric values of a deck of cards
@@ -28,30 +32,35 @@ set.seed(2718)
 # Exponential random variables (hint: rexp) with rate 3
 # (arrange the values by column, as per default)
 set.seed(344)
-
 #m <- <your code here>
-
+mm <- rexp(100,3)
+m <- matrix(mm, nrow=10,ncol=10, byrow=FALSE)
 
 # [1 pt]
 # Create [l], a list with 12 elements, each a vector of length 100.
 # Each vector of length 100 of Poisson (hint:rpois) random variables with mean 5
+
+
 set.seed(71)
 #l <- <your code here>
 
 
 # for the next two tasks you will use the data frame infants (size 1236x15)
 # LEAVE AS IS:
-load("KaiserBabies.rda") 
+load("KaiserBabies.rda")
 
 # [2 pt]
 # Create a table [t] of the education level ($ed) of all married ($marital) first time ($parity=1) mothers:
 #t <- <your code here>
-
+married <- subset(infants, marital=="Married")
+married1 <- subset(infants, parity == 1)
+t <- table(married1$ed)
 
 # [2 pt]
 # Calculate [mw], the average birthweight ($bwt) of all babies whose were full term, i.e. gestation equal or more than 259 days.
 #mw <- <your code here>
-
+fullterm <- subset(infants, gestation >= 259)
+mw <- sum(fullterm$bwt)/(length(fullterm$gestation))
 
 # For the next few tasks you will use the data frame family (size 14x5)
 # LEAVE AS IS:
@@ -60,23 +69,23 @@ load("family.rda")
 # [1 pt]
 # Create [f1] a subset of family with only women over age 50
 #f <- <your code here>
+f <- subset(family, gender =="f" & age >50)
 
-  
 # [1 pt]
 # Create [f2] a subset of family with only men 6 foot tall or more
 #fm <- <your code here>
-
+fm <- subset(family, gender =="m" & height> 6*12)
   
 # [1 pt]
 # Create [f3] a subset of family of people whose name starts with T
 #f3 <- <your code here>
-  
 
+  
 
 # [1 pt]
 # Create [f4] a subset of family with just the youngest individual (so just one row)
 #f4 <- <your code here>
-
+f4<- subset(family, age == min(family$age))
 
 
 
@@ -89,13 +98,17 @@ load("family.rda")
 
 # [2 pts]
 # Make a box plot of Sepal Length by Species (so 3 boxplots in one plot)
-
-
+setosa <- subset(iris, Species =="setosa")
+bersicolor <- subset(iris, Species == "versicolor")
+virginica <- subset(iris, Species == "virginica")
+boxplot(setosa$Sepal.Length,bersicolor$Sepal.Length, virginica$Sepal.Length)
 
 # [3 pts]
 # Make a scatterplot of petal width (y-axis) versus petal length (x-axis)
 # The axes labels should be "Petal Length" and "Petal Width",
 # Color the plotting symbol by Species (any 3 colors)
+
+plot(setosa$Petal.Length, setosa$Petal.Width, xlab= "Petal Length", ylab="Petal Width", col = "red")
 
 
 
@@ -110,12 +123,15 @@ load("family.rda")
 # (list of length 500, each element is a numeric vector of various lengths)
 # LEAVE AS IS:
 load("Cache500.rda")
-
+Cache500
 # [3 pts]
 # Create [first.cache], a vector where each entry is the _first_ element of the
 # corresponding vector in the list Cache500
 
+
 #first.cache <- <your code here>
+first. cache <- sapply(m, m[[1]])
+
 
 
 # [3 pts]
