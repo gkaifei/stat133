@@ -9,7 +9,13 @@
 #   <num.dot>: an integer indicating how many elements of <chvec> contain the "."
 #     symbol. For example: numDotElements(c('USA', 'U.S.A', '...')) should return 2
 
+numDotElements <- function(chvec){
+  return(length(grep("\\.",chevc)))
+}
 
+#TESTING
+chevc <- c('USA', 'U.S.A', '...')
+numDotElements(chevc)
 
 
 # Write a function called sumDigits that compute the sum of all the digits in
@@ -26,6 +32,14 @@
 all.equal(sumDigits("1z3p ! 21"), 7)
 all.equal(sumDigits("abcdefg"), 0)
 
+sumDigits <- function(chvec){
+  chvec1<- unlist(strsplit(chvec,""))
+  index <- grep("[0-9]",chvec1)
+  sum(as.numeric(chvec1[index]))
+}
+##testing
+#chvec <- "1z3p ! 21"
+#sumDigits(chvec)
 
 
 # Write a function called hisToHer that converts every instance of 
@@ -38,12 +52,23 @@ all.equal(sumDigits("abcdefg"), 0)
 # and return
 #   <herchvec>: The same character vector with the required substitutions.
 
+hisToHer <- function(chvec){
+  chevc1 <- gsub("him", "her",chevc)
+  chevc2 <- gsub("^h+e ", "she ",chevc1)
+  chevc3 <- gsub("his", "her", chevc2)
+  return(chevc3)
+}
+
+#Testing
+#chevc <- c("he went to the store his mother gave him", "she went to the store her mother gave her")
+#hisToHer(chevc)
 
 # A test case
 all.equal(
   hisToHers("he went to the store his mother gave him"), 
   "she went to the store her mother gave her"
 )
+
 
 
 # Write a function called mostCommonLetter that finds the most common 
@@ -58,4 +83,13 @@ all.equal(
 #  <letter> The most common letter or letters in the string.
 # For example mostCommonLetter("aabbccccdddd") should return 
 # [1] "c" "d"
+mostCommonLetter <- function(chvec){
+  chvec1 <- tolower(chvec)
+  chvecSplit <- unlist(strsplit(chvec1,""))
+  index<- grep("[a-z]",chvecSplit)
+  table <- as.matrix(table(chvecSplit[index]))
+  a <- which(table[,1]==max(table[,1]))
+  return(names(a))
+}
+
 
