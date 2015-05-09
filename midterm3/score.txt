@@ -1,0 +1,21 @@
+Total: 18/20
+
+Function 1
+5/5
+
+Function 2
+5/5
+
+Function 3
+3/5
+There are a few bugs - chevc instead of chvec and “h+e” instead of he.
+Also consider using \\< and \\> to match whole words only, at the moment
+we have
+> hisToHer("When he sees this")
+[1] "When he sees ther"
+
+
+
+Function 4
+5/5
+
