@@ -1,0 +1,162 @@
+#Text Data
+#### Some main functions: paste() ; substring(); nchar(); strsplit(); sub(); gsub(); grep(); grepl(); tolower(); toupper(); 
+Create an (empty) character vector
+```{r}
+str1 <- character()
+str1
+```
+
+```{r}
+str2 <- character(5)
+str2
+```
+
+check whether a variable is a character variable or cast a variable as a character variable:
+```{r}
+is.character(str2)
+
+```
+```{r}
+x <- 2 
+xchar <- as.character(x)
+xchar
+
+```
+
+#### String Manipulation in R
+Extract a portion of a character string from text, beginning at first, ending at last
+```{r}
+# substring(text, first, last)
+mytext <- "abcdefghijklmnopqrstuvwxyz"
+substring(mytext, 3, 6)
+
+# More on substring
+x <- "ABCDEF12467890*&^%$"
+substring(x, 3, 10)
+substring(x, 2, 2) <- "Q"
+x
+substring(x, 2, 4) <- "QQQ"
+x
+substring(x, 5)
+
+substring(x, 5) <- "..."
+x
+```
+
+split into one character pieces strplit(x, "")
+```{r}
+#strsplit(mytext, "") or strsplit(mytext, " ")
+## strsplit returns a list
+## use unlist() to unlist 
+x <- "Split the words in a sentence."
+strsplit(x, " ")
+
+y <- "Split at every character."
+strsplit(y, "")
+
+z <- "to:ko : lo: qo"
+strsplit(z, ":")
+```
+
+Paste together strings separated by one blank
+```{r}
+px <- "abc"
+py <- "124"
+pz <- "ABC"
+paste(px, py, pz, sep="", collapse = NULL)
+paste(px, py, pz, sep=" ", collapse = NULL)
+```
+
+Return the number of characters in a string
+```{r}
+mytext1 <- "qwerutysoisald"
+nchar(mytext1)
+```
+
+Convert upper-case char. to lower-case, or vice versa. Nonalphabetic hcaractes are left unchanged
+```{r}
+mytext2 <- "abcdefg1234xGDXDE"
+tolower(mytext2)
+toupper(mytext2)
+```
+
+## Functions which use regular expressions
+To extract a value from a string variable
+```{r}
+## grep() #returns indices of matches
+## grepl() # returns logical vector
+## sub()
+## gsub()
+```
+
+```{r}
+# grep() and grep1() examples
+# grep() searches for a particular pattern in EACH element of a vector x.
+URL <- "http://rfunction.com/code/1202/BarackObamaTweets.txt"
+tweets <- read.delim(URL)
+is.character(tweets)
+tweets <- as.character(tweets[,1])
+these <- grep("[Rr]omney", tweets)
+tweets[647]
+tweets[703]
+tweets[1272]
+these
+tweets[these]
+
+#grepl()
+xx <- "line 4332: He is now 25 years old, and weights 130lbs"
+yy <- grepl("\\d+", xx)
+yy
+
+zz <- grepl("[[:digit:]]", xx)
+zz
+
+strr <- c("Regular", "expression", "examples of R language")
+qq <- grepl("x*ress", strr)
+qq
+
+# The use of logical vectors
+a <- c(1,2,3,4,5)
+b <- c(TRUE, FALSE, FALSE, TRUE, FALSE)
+a[b]
+max(a[b])
+sum(a[b])
+
+aa <- c(1,2,3,4,NA)
+aa
+sum(aa)
+sum(aa,na.rm=TRUE)
+
+aaa <- c(1,2,3,4,NA)
+is.na(aaa)
+!is.na(aaa)
+a[!is.na(aaa)]
+```
+
+```{r}
+# sub() replace the first occurence of a pattern
+# Example does not make use of regular expressions
+x <- c("This is a sentence about axis", "A second pattern is also listed here")
+sub("is", "XY", x)
+
+# gsub() replace all occurences
+gsub("is", "XY", x)
+
+```
+
+stringr Package
+ignore.case(); str_extract(); str_detect(); str_replace(); str_dup
+```text
+install.packages("stringr")
+shopping_list <- c("apples x4", "flour", "sugar", "milk x2")
+str_extract(shopping_list, "\\d")
+str_extract(shopping_list, "[a-z]+")
+str_extract(shopping_list, "[a-z]{1,4}")
+str_extract(shopping_list, "\\b[a-z]{1,4}\\b")
+```
+
+
+
+
+
+
