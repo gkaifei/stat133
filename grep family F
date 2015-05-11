@@ -1,0 +1,20 @@
+x <- c("ABCDE", "CDEFG", "FGHIJ")
+xx <- regexpr("D", x)
+xx
+
+y <- c("ABCDE", "CDEFG", "FGHIJ")
+yy <- gregexpr("D", x)
+yy
+grep("D",x)
+
+z <- c("doGCATcat abcAt")
+z
+z <- tolower(z)
+z
+zz <- grep("cat",z)
+zz
+zzz <- gregexpr("cat",z)
+zzz
+as.vector(zzz[[1]])
+zzzz <- regexpr("cat", z)
+zzzz
