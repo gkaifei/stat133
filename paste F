@@ -1,0 +1,32 @@
+####Paste()
+```{r}
+aaa <- c("something","to","do")
+aaa
+paste(aaa)
+paste(aaa, sep="")
+paste(aaa, sep=" ")
+paste(aaa, collapse="")
+paste(aaa, collapse=" ")
+paste(aaa, collapse="_")
+paste(aaa, collapse="-")
+
+paste("The","quick", "brown", "fox")
+paste(c("The","quick", "brown", "fox"))
+words <- c("The","quick", "brown", "fox")
+paste(words, collapse=" ")
+paste(words, collapse="_")
+
+paste(LETTERS[1:5], 1:5, sep="_", collapse="---")
+
+paste("Sample", 1:5)
+paste("Sample", 1:5, sep="")
+paste("Sample", 1:5, sep=" ")
+paste("Sample", 1:5, sep="", collapse="")
+paste("Sample", 1:5, sep="", collapse=" ")
+paste("Sample", 1:5, sep="", collapse="--")
+
+# << z >> : a vector of length 20 with character entries, "hw1", "hw2", ..., "hw20"
+z <- paste0("hw", seq(1:20))
+z
+```
+
