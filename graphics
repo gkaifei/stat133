@@ -1,0 +1,33 @@
+# symbols(); {circles, xlab, ylab, main}
+
+# points(); {pch, type, }
+
+# []:
+
+# plot();{type, xlim, ylim, xlab, ylab, main,pch,}
+
+# lines();(col, )
+
+# abline();
+
+# order(); {a good example of how to order values in a vector}
+
+# text(); {lables, cex, col, offset; adj,}
+
+################
+# table and barplot combo;
+
+# table(); 
+# barplot(); {beside=, cex.names, xlim, ylim, las, main,}
+####################################################
+
+# names();
+# nrow();
+# sum();
+# length();
+# length(table());
+# data.frame();
+# is.na();
+# rep();
+
+
