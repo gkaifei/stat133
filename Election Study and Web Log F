@@ -1,0 +1,179 @@
+##Election Study & Web log % Extract data to make a data frame
+####Geographic/ Population/ Election Data
+```text
+"De Witt County",IL,40169623,-88904690
+"Lac qui Parle County",MN,45000955,-96175301
+"Lewis and Clark County",MT,47113693,-112377040
+"St John the Baptist Parish",LA,30118238,-90501892
+
+"St. John the Baptist Parish","43,044","52.6",.
+"De Witt County","16,798","97.8",...
+"Lac qui Parle County","8,067","98.8",...
+"Lewis and Clark County","55,716","95.2",...
+
+DeWitt                23 23 4,920 2,836    0
+Lac Qui Parle         31 31 2,093 2,390   36
+Lewis & Clark         54 54 16,432 12,655 386
+St. John the Baptist  35 35 9,039 10,305  74
+```
+#### Election results, different format
+```text
+"countyName" "bushVote" "kerryVote"
+"arizona,apache" 8068 15082
+"arizona,cochise" 24828 16219
+"arizona,coconino" 20619 26513
+"arizona,gila" 10494 7107
+"arizona,graham" 7302 3141
+"arizona,greenlee" 1899 1146
+"arizona,la paz" 3158 1849
+"arizona,maricopa" 539776 403882
+"arizona,mohave" 29608 16267
+"arizona,navajo" 16474 14224
+"arizona,pima" 138431 154291
+"arizona,pinal" 34813 25652
+"arizona,santa cruz" 4668 6909
+```
+#####Merging data from different sources; resovle how to match counties across sources
+
+```{r}
+#An example
+cnames <- c("Dewitt County", "Lac qui Parle County", "St John the Baptist Parish", "Stone County")
+test <- cnames[3]
+test
+substring(test, 1, 2)
+substring(test, 1, 2) == "St"
+newname <- paste("St.", substring(test, 3, nchar(test)), sep="")
+newname
+
+# A slight variation on the example
+substring(test, 1, 3)
+substring(test, 1, 2) == "St. "
+newName <- paste("St.", substring(test, 4, nchar(test)), sep=" ")
+newName
+```
+
+```{r}
+## We can do this for every element in cnames
+cnames <- c("Dewitt County", "Lac qui Parle County", "St John the Baptist Parish", "Stone County")
+substring(cnames, 1, 2) == "St"
+substring(cnames, 1, 3)
+substring(cnames, 1, 3) == "St "
+Newnames <- cnames
+whichReplace <- substring(cnames, 1, 3) == "St "
+Newnames[whichReplace] <- paste("St. ", substring(Newnames[whichReplace], 4, nchar(Newnames[whichReplace])), sep="")
+Newnames
+```
+
+```{r}
+## Yet another idea
+string <- "The Slippery St Frances"
+chars1 <- unlist(strsplit(string, " "))
+chars1
+
+chars <- unlist(strsplit(string, ""))
+chars
+
+# Now find S
+possible <- which(chars == "S")
+possible
+substring(string, possible, possible + 2)
+## Finish this...
+```
+
+```{r}
+# Final solution, use gsub()
+cnames <- c("Dewitt County", "Lac qui Parle County", "St John the Baptist Parish", "Stone County")
+gsub("St ", "St. ", cnames)
+```
+
+#### Web log
+```text
+169.237.46.168 - - [26/Jan/2004:10:47:58 -0800] 
+"GET /stat141/Winter04 HTTP/1.1" 301 328 
+"http://anson.ucdavis.edu/courses/" 
+"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.1.4322)â
+ 
+169.237.46.168 - - [26/Jan/2004:10:47:58 -0800] 
+"GET /stat141/Winter04/ HTTP/1.1" 200 2585 
+"http://anson.ucdavis.edu/courses/" 
+"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.1.4322)"
+```
+
+```{r}
+wl <-'169.237.46.168 - - [26/Jan/2004:10:47:58 -0800] "GET /stat141/Winter04 HTTP/1.1" 301 328 "http://anson.ucdavis.edu/courses/" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.1.4322)'
+
+#split wl
+wlpieces <- strsplit(wl, "")
+wlpieces
+# note wlpieces is a list with a lot of elements; 
+class(wlpieces)
+wlpieces <- unlist(strsplit(wl, ""))
+wlpieces
+beg <- which(wlpieces == "[")
+beg
+end <- which(wlpieces == "]")
+end
+
+beg <-  which(wlpieces == "[") + 1
+end <- which(wlpieces == "]") -1
+wholeDate <- substring(wl, beg, end)
+wholeDate
+
+# Now let us split to remove the time
+notime <- strsplit(wholeDate, ":")[[1]][1]
+#### Extract the fist element of the first list
+notime
+
+# to separate day, month and year
+datePieces <- strsplit(notime, "/")
+datePieces
+```
+
+####Web Log - Make a dataframe
+```{r}
+fileLoc="weblog.txt"
+wl = readLines(fileLoc)
+length(wl)
+class(wl)
+wl
+```
+
+```text
+# suppose we want to make a fata frame with the variables:
+- ip address
+- day of the month
+- month
+- year
+- operation
+- URL
+```
+
+```{r}
+# we split each part.
+wlist <- strsplit(wl, " \"| -- \\[|\" ")
+wlist[[1]]
+```
+
+```{r}
+# Now use these pieces to create our variables.
+# Easy ones, just pick off
+ipAddr <- sapply(wlist, function(x) x[1])
+url <- sapply(wlist, function(x) x[5])
+# slightly harder ones
+op <- sapply(wlist, function(x) gsub(" .*$", "", x[3]))
+op
+# get the pieces of the data
+dates <- sapply(wlist, function(x) strsplit(x[2], "/|:"))
+dates
+day <- sapply(dates, "[", 1)
+month <- sapply(dates, "[", 2)
+year <- sapply(dates, "[", 3)
+day
+month
+year
+# now put them in a data frame
+wlDF <- data.frame(ipAddr = ipAddr, day = day, month = month, year = year, op = op, url = url)
+wlDF
+```
+
+
