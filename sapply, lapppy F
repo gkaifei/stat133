@@ -1,0 +1,12 @@
+#load("rainfallCO.rda")
+#max.rain <- sapply(rain, max)
+#max.rain
+
+#mean.rain <- sapply(rain, mean)
+#mean.rain
+
+#sd.rain <- sapply(rain, sd)
+#sd.rain
+
+#n1989.rain <- sapply(day, function(x) sum(floor(x)==1989))
+#n1989.rain
