@@ -1,0 +1,38 @@
+## Regular Expression
+
+```text
+  grey|gray
+# matches both grey and gray
+
+  ^A.*
+# matches any string starting with capital A.
+
+  [A-Z]
+# is mathced by any capital letter
+# Modifiers operate on literal characters, character classes, or combinations of the two. For example ^
+
+# three components
+- literals
+- character classes
+- modifiers
+
+  [Tt]his
+  
+  [0-9], [A-Za-z]
+  
+  [[:alpha:]][[:digit:][:punct:]][[:alpha:]]
+# alpha + digit or punct + alpha
+
+```
+
+```{r}
+subjectLines <- c("Re: 90 days", "Fancy rep1!@ted watches", "It's me")
+subjectLines
+
+grep("[[:alpha:]][[:digit:][:punct:]][[:alpha:]]", subjectLines)
+
+# Remove the apostrophy first
+newstring <- gsub("'", "", subjectLines)
+grep("[[:alpha:]][[:digit:][:punct:]][[:alpha:]]", newstring)
+
+gregexpr("[[:alpha:]][[:digit:][:punct:]][[:alpha:]]", newstring)
