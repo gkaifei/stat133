@@ -92,19 +92,21 @@ powers <- function(x, k){
 # Put your code here
 # PLEASE READ THE DOC FOR IF/ELSE STATEMENTS -- ANDY
 recipeConversion <- function(recipe){
-    #      if ((colnames(recipe)[1] != "amount" | colnames(recipe)[2] != "unit" | colnames(recipe)[3] != "ingredient") | ncol>4) # Was wrong here, doesn't have the right parathesis
-    #   stop ("Please check your data.")
-    #   else {
-    #    k <- nrow(recipe)
-    #    for (i in 1:k){
-    #      if (recipe[i,2]=="cup" | recipe[i,2] =="cups")
-    #         recipe[i,2] <- "ml"
-    #        recipe[i,1] <- round(recipe[i,1]*236.6/5)*5
-    #    else recipe[i,2] =="oz"
-    #        recipe[i,2] <- "grams"
-    #        recipe[i,1] <- round(recipe[i,1]*28.3/5)*5
-    #          }
-    #        return(recipe)
+          #if ((colnames(recipe)[1] != "amount" | colnames(recipe)[2] != "unit" | colnames(recipe)[3] != "ingredient") | ncol>4)  stop ("Please check your data.")
+          # This is edited by andy
+            k <- nrow(recipe)
+             for (i in 1:k){
+                 if (recipe[i,2]=="cup" | recipe[i,2] =="cups"){
+                    recipe[i,2] <- "ml"
+                 recipe[i,1] <- round(recipe[i,1]*236.6/5)*5}
+                 else {
+                     recipe[i,2] =="oz"
+                     recipe[i,2] <- "grams"
+                     recipe[i,1] <- round(recipe[i,1]*28.3/5)*5
+                 }
+          }
+                 return(recipe)
+
 }
 
 
@@ -135,6 +137,7 @@ recipeConversion <- function(recipe){
 
 bootstrapVarEst <- function(x, B){
   boot_mean <- rep(0,B)
+  n = length(x)
   for (i in 1:B){
     new_sample <- sample(x=x, size=n, replace=TRUE)
     boot_mean[i] <- mean(new_sample)
@@ -162,7 +165,7 @@ return(var(boot_mean))
 # -- The jackknife variance is the sample variance of mu_1, mu_2, ..., mu_n
 
 jackknifeVarEst <- function(x){
-  jackknife_mean <- rep(0,x)
+    jackknife_mean <- rep(0,length(x))
   n <- length(x)
   for (i in n) {
     jackknife_mean[i] <- mean(x[-i])
@@ -184,7 +187,7 @@ return(var(jackknife_mean))
 
 samplingVarEst <- function(x,type="bootstrap"){
   if (type == "bootstrap"){
-    sampling.sigma.est <- bootstrapVarEst(x)
+    sampling.sigma.est <- bootstrapVarEst(x, B=1000)
   }
   else if (type =="jackknife"){
     sampling.sigma.est <- jackknifeVarEst(x)
@@ -192,6 +195,6 @@ samplingVarEst <- function(x,type="bootstrap"){
   else { 
     stop ("Please enter correct parameters")
 }
-return(samling.sigma.est)
+return(sampling.sigma.est)
 }
 
