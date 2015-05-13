@@ -276,12 +276,12 @@ prop.rain <- sapply(rain, function(x) sum(x>0)/length(x))
 # in a separate panel (there will be one empty panel)
 # use an apply statment to the the plotting
 par(mfrow=c(2,3))
-Come Back!!!!
+#Come Back!!!!
 ?apply
-apply(rain, function(x) hist(x))
+#apply(rain, function(x) hist(x)) # Andy
 ?hist
 
-hist(tmp, xlab="sum of dice roll", main=paste("Histogram for B=", Bvec[i]))
+#hist(tmp, xlab="sum of dice roll", main=paste("Histogram for B=", Bvec[i])) #Andy
 
 #################################################################
 ##### PART IV : functions [20 pts]
@@ -359,11 +359,11 @@ standardizeVar <- function(m, cols=TRUE){
 #    A vector of length k where each element is the value 
 #    mean(cases)-mean(controls) for one permutation
 
-PermDiff() <- function(cases, controls, k=5000) {
-  cases <- sample(c(cases, controls), size=k, replace=FALSE))
+#PermDiff() <- function(cases, controls, k=5000) { #Andy
+#  cases <- sample(c(cases, controls), size=k, replace=FALSE)
 
   
-}
+#}
 ?sample
 ## PermDiff <- function(cases, controls, k=5000){
 ##   <your code here>
