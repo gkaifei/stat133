@@ -92,9 +92,9 @@ powers <- function(x, k){
 # Put your code here
 # PLEASE READ THE DOC FOR IF/ELSE STATEMENTS -- ANDY
 recipeConversion <- function(recipe){
-    #    if ((colnames(recipe)[1] != "amount" | colnames(recipe)[2] != "unit" | colnames(recipe)[3] != "ingredient") | ncol>4) # Was wrong here, doesn't have the right parathesis
-    #  stop ("Please check your data.")
-    # else
+    #      if ((colnames(recipe)[1] != "amount" | colnames(recipe)[2] != "unit" | colnames(recipe)[3] != "ingredient") | ncol>4) # Was wrong here, doesn't have the right parathesis
+    #   stop ("Please check your data.")
+    #   else {
     #    k <- nrow(recipe)
     #    for (i in 1:k){
     #      if (recipe[i,2]=="cup" | recipe[i,2] =="cups")
@@ -103,8 +103,8 @@ recipeConversion <- function(recipe){
     #    else recipe[i,2] =="oz"
     #        recipe[i,2] <- "grams"
     #        recipe[i,1] <- round(recipe[i,1]*28.3/5)*5
-           #   }
-           # return(recipe)
+    #          }
+    #        return(recipe)
 }
 
 
