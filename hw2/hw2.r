@@ -329,9 +329,9 @@ names(SO2012Ctry)
 
 # pull out the contries that won at least one medal (you will need at least
 # the contries longitude, latitude and Total.)
-longitude <- has_medals$longitude
-latitude <- has_medals$latitude
-Total <- has_medals$Total
+longitude <- has_medals_countries$longitude
+latitude <- has_medals_countries$latitude
+Total <- has_medals_countries$Total
 
 # wonMedal <- your code here
 wonMedal <- has_medals_countries[,c("longitude", "latitude", "Total")]
