@@ -106,8 +106,8 @@ m <- matrix(rnorm(100, mean=8), ncol=10)
 # For the next few tasks you will use the data frame ChickWeight
 # This data frame comes with R so you do not need to load any data.
 # To get the size of the data frame type
- dim(ChickWeight)
-View(ChickWeight)
+# dim(ChickWeight)
+#View(ChickWeight)
 # To see the first few lines type
 head(ChickWeight)
 # There are 4 variables in the dataframe:
@@ -277,9 +277,9 @@ prop.rain <- sapply(rain, function(x) sum(x>0)/length(x))
 # use an apply statment to the the plotting
 par(mfrow=c(2,3))
 #Come Back!!!!
-?apply
+#?apply
 #apply(rain, function(x) hist(x)) # Andy
-?hist
+#?hist
 
 #hist(tmp, xlab="sum of dice roll", main=paste("Histogram for B=", Bvec[i])) #Andy
 
@@ -364,7 +364,7 @@ standardizeVar <- function(m, cols=TRUE){
 
   
 #}
-?sample
+#?sample
 ## PermDiff <- function(cases, controls, k=5000){
 ##   <your code here>
   
